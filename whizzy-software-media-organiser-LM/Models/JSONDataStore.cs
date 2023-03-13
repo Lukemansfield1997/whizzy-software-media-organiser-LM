@@ -8,6 +8,7 @@ namespace whizzy_software_media_organiser_LM.Models
 {
     public class JSONDataStore
     {
-
+        public string ApplicationDirectoryPath { get; set; }
+        public string SavedPlaylistsDirectory { get; set; }
     }
 }

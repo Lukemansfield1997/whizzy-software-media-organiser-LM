@@ -6,17 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using whizzy_software_media_organiser_LM.Models;
-using Formatting = Newtonsoft.Json.Formatting;
 
 namespace whizzy_software_media_organiser_LM.Services
 {
     public class PlaylistService
     {
         private List<Playlist> _allPlaylists;
+        private JsonDataStoreService _jsonDataStoreService;
 
         public PlaylistService()
         {
             _allPlaylists = new List<Playlist>();
+            _jsonDataStoreService = new JsonDataStoreService(); 
         }
 
         public Playlist CreatePlaylist(string playlistName)
@@ -52,15 +53,7 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void SavePlaylist(Playlist playlist)
         {
-            var jsonToWrite = JsonConvert.SerializeObject(playlist, Formatting.Indented);
-
-            string filePath = Path.Combine(Path.Combine("C:\\QA\\SynopticWhizzyMediaOrganiser\\whizzy-software-media-organiser-LM\\whizzy-software-media-organiser-LM\\bin\\Debug\\net6.0-windows"), playlist.PlayListID + ".json");
-
-            using (var writer = new StreamWriter(filePath))
-            {
-                writer.Write(jsonToWrite);
-
-            }
+          _jsonDataStoreService.SavePlaylists(playlist);    
         }
 
         public void DeletePlaylist(int Id)
