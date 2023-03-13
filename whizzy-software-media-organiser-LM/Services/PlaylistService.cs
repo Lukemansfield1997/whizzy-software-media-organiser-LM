@@ -51,6 +51,11 @@ namespace whizzy_software_media_organiser_LM.Services
            playlist.PlayListName = playlistName;
         }
 
+        public void LoadPlaylists()
+        {
+            _jsonDataStoreService.LoadPlaylists(_allPlaylists);
+        }
+
         public void SavePlaylist(Playlist playlist)
         {
           _jsonDataStoreService.SavePlaylists(playlist);    

@@ -12,6 +12,13 @@ namespace whizzy_software_media_organiser_LM
             InitializeComponent();
             _playlistService = new PlaylistService();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            _playlistService.LoadPlaylists();
+            updateListBoxData();
+        }
+
         #region
         //Datasource helper methods
         public void updateListBoxData()

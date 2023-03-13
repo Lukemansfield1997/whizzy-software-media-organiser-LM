@@ -236,6 +236,7 @@
             this.MainMenuStrip = this.FilemenuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.FilemenuStrip.ResumeLayout(false);
             this.FilemenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).EndInit();
