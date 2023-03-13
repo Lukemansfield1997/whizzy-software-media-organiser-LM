@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.playlistBox = new System.Windows.Forms.ListBox();
             this.FilemenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +43,10 @@
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FilemenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // playlistBox
@@ -116,6 +119,7 @@
             this.btnSelectMediaFiles.TabIndex = 15;
             this.btnSelectMediaFiles.Text = "Select Media Files";
             this.btnSelectMediaFiles.UseVisualStyleBackColor = false;
+            this.btnSelectMediaFiles.Click += new System.EventHandler(this.btnSelectMediaFiles_Click);
             // 
             // btnRenamePlaylist
             // 
@@ -215,12 +219,23 @@
             this.button7.Text = "Save Categories";
             this.button7.UseVisualStyleBackColor = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1605, 100);
+            this.pictureBox1.TabIndex = 23;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1605, 570);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.btnAddCategory);
@@ -240,6 +255,7 @@
             this.FilemenuStrip.ResumeLayout(false);
             this.FilemenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +277,6 @@
         private Button btnAddCategory;
         private Button button6;
         private Button button7;
+        private PictureBox pictureBox1;
     }
 }

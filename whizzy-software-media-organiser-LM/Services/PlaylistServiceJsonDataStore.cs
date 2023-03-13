@@ -9,12 +9,12 @@ using whizzy_software_media_organiser_LM.Models;
 
 namespace whizzy_software_media_organiser_LM.Services
 {
-    public class PlaylistService
+    public class PlaylistServiceJsonDataStore
     {
         private List<Playlist> _allPlaylists;
         private JsonDataStoreService _jsonDataStoreService;
 
-        public PlaylistService()
+        public PlaylistServiceJsonDataStore()
         {
             _allPlaylists = new List<Playlist>();
             _jsonDataStoreService = new JsonDataStoreService(); 
@@ -53,7 +53,7 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void LoadPlaylists()
         {
-            _jsonDataStoreService.LoadPlaylists(_allPlaylists);
+          _jsonDataStoreService.LoadPlaylists(_allPlaylists);
         }
 
         public void SavePlaylist(Playlist playlist)
@@ -64,9 +64,19 @@ namespace whizzy_software_media_organiser_LM.Services
         public void DeletePlaylist(int playlistID)
         {
           _allPlaylists.Remove(GetPlayListById(playlistID));
-            _jsonDataStoreService.DeletePlaylist(playlistID);
-
+          _jsonDataStoreService.DeletePlaylist(playlistID);
         }
 
+        public void AddMediaFileToPlaylist(int playlistID, string mediaFile)
+        {
+            var selectedPlaylist = GetPlayListById(playlistID);
+
+            selectedPlaylist.MediaFileItems.Add(new MediaItem
+            {
+                Song = Path.GetFileNameWithoutExtension(mediaFile),
+                FilePath = Path.GetFullPath(mediaFile),
+                FileType = Path.GetExtension(mediaFile)
+            });
+        }
     }
 }

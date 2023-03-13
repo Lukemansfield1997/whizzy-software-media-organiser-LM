@@ -4,11 +4,11 @@ namespace whizzy_software_media_organiser_Tests
 {
     public class PlaylistTests
     {
-        PlaylistService _playlistService;
+        PlaylistServiceJsonDataStore _playlistService;
         [SetUp]
         public void Setup()
         {
-            _playlistService = new PlaylistService();
+            _playlistService = new PlaylistServiceJsonDataStore();
         }
 
         [Test]

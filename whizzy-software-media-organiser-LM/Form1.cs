@@ -1,16 +1,17 @@
 using Microsoft.VisualBasic;
 using whizzy_software_media_organiser_LM.Models;
 using whizzy_software_media_organiser_LM.Services;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace whizzy_software_media_organiser_LM
 {
     public partial class Form1 : Form
     {
-        PlaylistService _playlistService;
+        PlaylistServiceJsonDataStore _playlistService;
         public Form1()
         {
             InitializeComponent();
-            _playlistService = new PlaylistService();
+            _playlistService = new PlaylistServiceJsonDataStore();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,6 +29,16 @@ namespace whizzy_software_media_organiser_LM
             playlistBox.DisplayMember = "PlaylistName";
             playlistBox.ValueMember = "PlaylistID";
 
+        }
+
+        public void updateMediaGridData(Playlist playlist)
+        {
+            if (playlist != null && playlistBox.SelectedIndex >= 0)
+            {
+                mediaFilesGridView.DataSource = null;
+                mediaFilesGridView.DataSource = playlist.MediaFileItems;
+                mediaFilesGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells); 
+            }
         }
         #endregion
 
@@ -163,6 +174,34 @@ namespace whizzy_software_media_organiser_LM
             else
             {
                 MessageBox.Show("Error: Please select a playlist from your Playlists to save");
+            }
+        }
+
+        private void btnSelectMediaFiles_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+
+            if (selectedPlaylist is not null)
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Audio files|*.mp3;*.wav;*.aac;*.flac;*.wma*|All files|*.*";
+                    openFileDialog.Multiselect = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        foreach (var mediaFile in openFileDialog.FileNames)
+                        {
+                            _playlistService.AddMediaFileToPlaylist(selectedPlaylist.PlayListID, mediaFile);
+                        }
+                        updateMediaGridData(selectedPlaylist);
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error occured: Please select the playlist you want to add media files to");
             }
         }
         #endregion
