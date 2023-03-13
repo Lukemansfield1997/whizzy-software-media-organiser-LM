@@ -62,5 +62,19 @@ namespace whizzy_software_media_organiser_LM.Services
                 }
             }
         }
+
+        public void DeletePlaylist(int playlistID)
+        {
+            string filePath = Path.Combine(_jsonDataStoreConfig.SavedPlaylistsDirectory, $"{playlistID}.json");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            else
+            {
+                throw new FileNotFoundException($"File path not found: {filePath}");
+            }
+        }
     }
 }

@@ -33,11 +33,11 @@ namespace whizzy_software_media_organiser_LM.Services
             return newPlaylist;
         }
 
-        public Playlist GetPlayListById(int id)
+        public Playlist GetPlayListById(int playlistID)
         {
             // will iterate through allPlaylists, find a playlist that matches the playlist id parsed
             // and return the playlist to the user
-            return _allPlaylists.SingleOrDefault(i => i.PlayListID == id);
+            return _allPlaylists.SingleOrDefault(i => i.PlayListID == playlistID);
         }
 
         public List<Playlist> GetPlayLists()
@@ -61,9 +61,10 @@ namespace whizzy_software_media_organiser_LM.Services
           _jsonDataStoreService.SavePlaylists(playlist);    
         }
 
-        public void DeletePlaylist(int Id)
+        public void DeletePlaylist(int playlistID)
         {
-          _allPlaylists.Remove(GetPlayListById(Id));
+          _allPlaylists.Remove(GetPlayListById(playlistID));
+            _jsonDataStoreService.DeletePlaylist(playlistID);
 
         }
 
