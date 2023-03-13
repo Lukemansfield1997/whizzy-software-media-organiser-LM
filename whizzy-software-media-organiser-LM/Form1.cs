@@ -57,7 +57,7 @@ namespace whizzy_software_media_organiser_LM
                 {
                     //if true, display message box showing the error
                     case true:
-                        MessageBox.Show("Error: Playlist name cannot be empty, please try again.");
+                        MessageBox.Show("Error occured: Playlist name cannot be empty, please try again.");
                         playlistNameExists = false;
                         break;
 
@@ -65,7 +65,7 @@ namespace whizzy_software_media_organiser_LM
                     case false:
                         if (_playlistService.GetPlayLists().Any(p => p.PlayListName == playlistName))
                         {
-                            MessageBox.Show("Error: Playlist name already exists, please try again.");
+                            MessageBox.Show("Error occured: Playlist name already exists, please try again.");
                             playlistNameExists = true;
                         }
                         else
@@ -107,12 +107,12 @@ namespace whizzy_software_media_organiser_LM
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
+                    MessageBox.Show($"Error occured:: {ex.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("Error: Please select a playlist from Playlists to delete");
+                MessageBox.Show("Error occured: Please select a playlist from Playlists to delete");
             }
         }
 
@@ -134,14 +134,14 @@ namespace whizzy_software_media_organiser_LM
                     switch (string.IsNullOrEmpty(playlistName))
                     {
                         case true:
-                            MessageBox.Show("Playlist name cannot be empty, please try again.");
+                            MessageBox.Show("Error occured: Playlist name cannot be empty, please try again.");
                             playlistNameExists = false;
                             break;
 
                         case false:
                             if (_playlistService.GetPlayLists().Any(p => p.PlayListName == playlistName))
                             {
-                                MessageBox.Show("Playlist name already exists, please try again.");
+                                MessageBox.Show("Error occured: Playlist name already exists, please try again.");
                                 playlistNameExists = true;
                             }
                             else
@@ -158,7 +158,7 @@ namespace whizzy_software_media_organiser_LM
             }
             else
             {
-                MessageBox.Show("Error: Please select a playlist from Playlists to rename");
+                MessageBox.Show("Error occured: Please select a playlist from Playlists to rename");
             }
         }
 
@@ -173,7 +173,7 @@ namespace whizzy_software_media_organiser_LM
             }
             else
             {
-                MessageBox.Show("Error: Please select a playlist from your Playlists to save");
+                MessageBox.Show("Error occured: Please select a playlist from your Playlists to save");
             }
         }
 
@@ -205,5 +205,11 @@ namespace whizzy_software_media_organiser_LM
             }
         }
         #endregion
+
+        private void playlistBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            updateMediaGridData(selectedPlaylist);
+        }
     }
 }

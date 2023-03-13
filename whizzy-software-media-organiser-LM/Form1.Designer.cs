@@ -57,6 +57,7 @@
             this.playlistBox.Name = "playlistBox";
             this.playlistBox.Size = new System.Drawing.Size(244, 304);
             this.playlistBox.TabIndex = 0;
+            this.playlistBox.SelectedIndexChanged += new System.EventHandler(this.playlistBox_SelectedIndexChanged);
             // 
             // FilemenuStrip
             // 
