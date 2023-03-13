@@ -128,7 +128,9 @@ namespace whizzy_software_media_organiser_LM
 
         private void btnSavePlaylist_Click(object sender, EventArgs e)
         {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
 
+            _playlistService.SavePlaylist(selectedPlaylist);
         }
     }
 }
