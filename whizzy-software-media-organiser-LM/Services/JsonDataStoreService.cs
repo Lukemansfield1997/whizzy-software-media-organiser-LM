@@ -71,10 +71,6 @@ namespace whizzy_software_media_organiser_LM.Services
             {
                 File.Delete(filePath);
             }
-            else
-            {
-                throw new FileNotFoundException($"File path not found: {filePath}");
-            }
         }
     }
 }

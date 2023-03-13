@@ -31,7 +31,7 @@ namespace whizzy_software_media_organiser_LM
         }
         #endregion
 
-        //Playlists code
+        //PLAYLIST CODE
         #region
         private void btnCreatePlaylist_Click(object sender, EventArgs e)
         {
@@ -80,13 +80,23 @@ namespace whizzy_software_media_organiser_LM
                 {
                     //parse selected playlist ID to DeletePlaylist method, which will remove object from allPlaylists
                     _playlistService.DeletePlaylist(selectedPlaylist.PlayListID);
-                    MessageBox.Show($"playlist: {selectedPlaylist.PlayListName} is deleted from your playlists");
+                    MessageBox.Show($"Playlist: {selectedPlaylist.PlayListName} is deleted from your playlists");
                     updateListBoxData();
                 }
+                //will catch exception for index out of range and inform the user
                 catch (IndexOutOfRangeException ex)
                 {
                     MessageBox.Show(ex.Message);
                     throw;
+                }
+                //will catch exception for file not found and inform the user
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
                 }
             }
             else
@@ -99,45 +109,62 @@ namespace whizzy_software_media_organiser_LM
         {
             //Get selected playlist in PlaylistBox
             Playlist selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            string oldPlaylistName = "";
 
-            bool playlistNameExists = true;
-
-            while (playlistNameExists)
+            if (selectedPlaylist is not null)
             {
-                string playlistName = Interaction.InputBox("Please enter a new name for your playlist", "Rename Playlist");
+               oldPlaylistName = selectedPlaylist.PlayListName;
+                bool playlistNameExists = true;
 
-                switch (string.IsNullOrEmpty(playlistName))
+                while (playlistNameExists)
                 {
-                    case true:
-                        MessageBox.Show("Playlist name cannot be empty, please try again.");
-                        playlistNameExists = false;
-                        break;
+                    string playlistName = Interaction.InputBox("Please enter a new name for your playlist", "Rename Playlist");
 
-                    case false:
-                        if (_playlistService.GetPlayLists().Any(p => p.PlayListName == playlistName))
-                        {
-                            MessageBox.Show("Playlist name already exists, please try again.");
-                            playlistNameExists = true;
-                        }
-                        else
-                        {
-                            _playlistService.RenamePlaylist(selectedPlaylist, playlistName);
-                            MessageBox.Show($"Playlist is now renamed as {playlistName}");
-                            updateListBoxData();
+                    switch (string.IsNullOrEmpty(playlistName))
+                    {
+                        case true:
+                            MessageBox.Show("Playlist name cannot be empty, please try again.");
                             playlistNameExists = false;
-                        }
-                        break;
+                            break;
 
+                        case false:
+                            if (_playlistService.GetPlayLists().Any(p => p.PlayListName == playlistName))
+                            {
+                                MessageBox.Show("Playlist name already exists, please try again.");
+                                playlistNameExists = true;
+                            }
+                            else
+                            {
+                                _playlistService.RenamePlaylist(selectedPlaylist, playlistName);
+                                MessageBox.Show($"Playlist {oldPlaylistName} is now renamed as {playlistName}");
+                                updateListBoxData();
+                                playlistNameExists = false;
+                            }
+                            break;
+
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Error: Please select a playlist from Playlists to rename");
+            }
         }
-        #endregion
 
         private void btnSavePlaylist_Click(object sender, EventArgs e)
         {
             var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
 
-            _playlistService.SavePlaylist(selectedPlaylist);
+            if (selectedPlaylist is not null)
+            {
+                _playlistService.SavePlaylist(selectedPlaylist);
+                MessageBox.Show($"Playlist: {selectedPlaylist.PlayListName} is saved");
+            }
+            else
+            {
+                MessageBox.Show("Error: Please select a playlist from your Playlists to save");
+            }
         }
+        #endregion
     }
 }
