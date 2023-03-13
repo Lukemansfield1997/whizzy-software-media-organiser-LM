@@ -21,8 +21,10 @@ namespace whizzy_software_media_organiser_Tests
             _playlistService.CreatePlaylist(playlistName);
 
             //Assert
-            Assert.That(1, Is.EqualTo(_playlistService.GetPlayLists().Count));
+            Assert.That(_playlistService.GetPlayLists().Count, Is.EqualTo(1));
         }
+        
+
         [Test]
         public void PlaylistIsDeleted()
         {
@@ -34,8 +36,9 @@ namespace whizzy_software_media_organiser_Tests
             _playlistService.DeletePlaylist(createdPlaylist.PlayListID);
 
             //Assert
-            Assert.That(0, Is.EqualTo(_playlistService.GetPlayLists().Count));
+            Assert.That(_playlistService.GetPlayLists().Count, Is.EqualTo(0));
         }
+
         [Test]
         public void PlaylistIsRenamed()
         {
@@ -49,7 +52,7 @@ namespace whizzy_software_media_organiser_Tests
             _playlistService.RenamePlaylist(createdPlaylist, newPlaylistName);
 
             //Assert
-            Assert.That(createdPlaylist.PlayListName, Is.EqualTo(newPlaylistName));
+            Assert.That(newPlaylistName, Is.EqualTo(createdPlaylist.PlayListName));
         }
     }
 }
