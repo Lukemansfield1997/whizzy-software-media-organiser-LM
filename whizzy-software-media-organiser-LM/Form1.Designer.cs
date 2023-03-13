@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.playlistBox = new System.Windows.Forms.ListBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.FilemenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaFilesGridView = new System.Windows.Forms.DataGridView();
@@ -42,7 +42,7 @@
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.FilemenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,15 +55,15 @@
             this.playlistBox.Size = new System.Drawing.Size(244, 304);
             this.playlistBox.TabIndex = 0;
             // 
-            // menuStrip1
+            // FilemenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FilemenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1605, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.FilemenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.FilemenuStrip.Name = "FilemenuStrip";
+            this.FilemenuStrip.Size = new System.Drawing.Size(1605, 24);
+            this.FilemenuStrip.TabIndex = 1;
+            this.FilemenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -101,6 +101,7 @@
             this.btnCreatePlaylist.TabIndex = 14;
             this.btnCreatePlaylist.Text = "Create Playlist";
             this.btnCreatePlaylist.UseVisualStyleBackColor = false;
+            this.btnCreatePlaylist.Click += new System.EventHandler(this.btnCreatePlaylist_Click);
             // 
             // btnSelectMediaFiles
             // 
@@ -129,6 +130,7 @@
             this.btnRenamePlaylist.TabIndex = 16;
             this.btnRenamePlaylist.Text = "Rename Playlist";
             this.btnRenamePlaylist.UseVisualStyleBackColor = false;
+            this.btnRenamePlaylist.Click += new System.EventHandler(this.btnRenamePlaylist_Click);
             // 
             // btnSavePlaylist
             // 
@@ -143,6 +145,7 @@
             this.btnSavePlaylist.TabIndex = 17;
             this.btnSavePlaylist.Text = "Save Playlist";
             this.btnSavePlaylist.UseVisualStyleBackColor = false;
+            this.btnSavePlaylist.Click += new System.EventHandler(this.btnSavePlaylist_Click);
             // 
             // btnLoadPlaylist
             // 
@@ -171,6 +174,7 @@
             this.btnDeletePlaylist.TabIndex = 19;
             this.btnDeletePlaylist.Text = "Delete Playlist";
             this.btnDeletePlaylist.UseVisualStyleBackColor = false;
+            this.btnDeletePlaylist.Click += new System.EventHandler(this.btnDeletePlaylist_Click);
             // 
             // btnAddCategory
             // 
@@ -228,12 +232,12 @@
             this.Controls.Add(this.btnCreatePlaylist);
             this.Controls.Add(this.mediaFilesGridView);
             this.Controls.Add(this.playlistBox);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.FilemenuStrip);
+            this.MainMenuStrip = this.FilemenuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.FilemenuStrip.ResumeLayout(false);
+            this.FilemenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,7 +247,7 @@
         #endregion
 
         private ListBox playlistBox;
-        private MenuStrip menuStrip1;
+        private MenuStrip FilemenuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem mediaPathToolStripMenuItem;
         private DataGridView mediaFilesGridView;
