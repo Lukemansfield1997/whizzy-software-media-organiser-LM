@@ -80,7 +80,7 @@ namespace whizzy_software_media_organiser_LM
             if (checkedCategoryBox.SelectedItem == null && 
                 checkedCategoryBox.GetItemCheckState(checkedCategoryBox.SelectedIndex) == CheckState.Unchecked)
             {
-                MessageBox.Show("Please check a valid category to rename");
+                MessageBox.Show("Error occured: Please check a valid category to rename");
             }
             else
             {
