@@ -77,7 +77,8 @@ namespace whizzy_software_media_organiser_LM
             string oldCategoryName = selectedCategory.CategoryName;
 
             //if block will check if selected item is null or selected item checkbox state is unchecked, if true prompt user to check valid category
-            if (checkedCategoryBox.SelectedItem == null || checkedCategoryBox.GetItemCheckState(checkedCategoryBox.SelectedIndex) == CheckState.Unchecked)
+            if (checkedCategoryBox.SelectedItem == null && 
+                checkedCategoryBox.GetItemCheckState(checkedCategoryBox.SelectedIndex) == CheckState.Unchecked)
             {
                 MessageBox.Show("Please check a valid category to rename");
             }
@@ -136,7 +137,35 @@ namespace whizzy_software_media_organiser_LM
 
         private void btnDeleteCategories_Click(object sender, EventArgs e)
         {
+            //get selected playlist object
+            var selectedPlaylist = (Playlist)_playistBox.SelectedItem;
 
+            //if playlist object is not null and category item is selected, loop through all checkedCatItems and remove cat from mediaFile and allCategories list
+            if (selectedPlaylist != null && checkedCategoryBox.SelectedItem != null && 
+                checkedCategoryBox.GetItemCheckState(checkedCategoryBox.SelectedIndex) == CheckState.Checked)
+            {
+                foreach (Category category in checkedCategoryBox.CheckedItems)
+                {
+                    // get category ID and Name values and use values for removing Category items from media file and allCategories list
+                    int categoryID = category.CategoryID;
+                    string categoryName = category.CategoryName;
+
+                    foreach (var mediaFileItem in selectedPlaylist.MediaFileItems)
+                    {
+                        if (mediaFileItem.CategoriesList.Contains(category))
+                        {
+                            mediaFileItem.CategoriesList.Remove(category);
+                            _categoryService.DeleteCategory(categoryID);
+                        }
+                    }
+                }
+                _mediaDataGridView.Refresh();
+                UpdateCategoryManagerDataSource();
+            }
+            else
+            {
+                MessageBox.Show("Error occured: Please check a valid category to delete");
+            }
         }
     }
 }
