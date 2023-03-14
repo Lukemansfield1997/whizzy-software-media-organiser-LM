@@ -22,10 +22,10 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public Playlist CreatePlaylist(string playlistName)
         {
-            int newPlaylistID = 1; // Assign the default ID as 1
+            int newPlaylistID = 1; // set the default ID as 1
             while (_allPlaylists.Any(p => p.PlayListID == newPlaylistID))
             {
-                newPlaylistID++; // Keep incrementing the ID until a unique ID is found
+                newPlaylistID++; // increment the ID until a unique ID is found in allPlaylists to use
             }
 
             var newPlaylist = new Playlist

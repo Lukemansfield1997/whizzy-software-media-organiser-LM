@@ -6,10 +6,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace whizzy_software_media_organiser_LM
 {
-    public partial class Form1 : Form
+    public partial class WhizzyMediaPlayerMain : Form
     {
         PlaylistServiceJsonDataStore _playlistService;
-        public Form1()
+        public WhizzyMediaPlayerMain()
         {
             InitializeComponent();
             _playlistService = new PlaylistServiceJsonDataStore();

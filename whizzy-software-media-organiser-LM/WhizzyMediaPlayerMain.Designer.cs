@@ -1,6 +1,6 @@
 ﻿namespace whizzy_software_media_organiser_LM
 {
-    partial class Form1
+    partial class WhizzyMediaPlayerMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WhizzyMediaPlayerMain));
             this.playlistBox = new System.Windows.Forms.ListBox();
             this.FilemenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,12 +38,17 @@
             this.btnSelectMediaFiles = new System.Windows.Forms.Button();
             this.btnRenamePlaylist = new System.Windows.Forms.Button();
             this.btnSavePlaylist = new System.Windows.Forms.Button();
-            this.btnLoadPlaylist = new System.Windows.Forms.Button();
             this.btnDeletePlaylist = new System.Windows.Forms.Button();
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAddImage = new System.Windows.Forms.Button();
+            this.btnRemoveImage = new System.Windows.Forms.Button();
+            this.btnEditImage = new System.Windows.Forms.Button();
+            this.btnRemoveComment = new System.Windows.Forms.Button();
+            this.btnEditComment = new System.Windows.Forms.Button();
+            this.btnAddComment = new System.Windows.Forms.Button();
             this.FilemenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,7 +60,7 @@
             this.playlistBox.ItemHeight = 15;
             this.playlistBox.Location = new System.Drawing.Point(12, 133);
             this.playlistBox.Name = "playlistBox";
-            this.playlistBox.Size = new System.Drawing.Size(244, 304);
+            this.playlistBox.Size = new System.Drawing.Size(244, 259);
             this.playlistBox.TabIndex = 0;
             this.playlistBox.SelectedIndexChanged += new System.EventHandler(this.playlistBox_SelectedIndexChanged);
             // 
@@ -89,7 +94,7 @@
             this.mediaFilesGridView.Location = new System.Drawing.Point(386, 133);
             this.mediaFilesGridView.Name = "mediaFilesGridView";
             this.mediaFilesGridView.RowTemplate.Height = 25;
-            this.mediaFilesGridView.Size = new System.Drawing.Size(1013, 304);
+            this.mediaFilesGridView.Size = new System.Drawing.Size(1013, 259);
             this.mediaFilesGridView.TabIndex = 2;
             // 
             // btnCreatePlaylist
@@ -152,20 +157,6 @@
             this.btnSavePlaylist.UseVisualStyleBackColor = false;
             this.btnSavePlaylist.Click += new System.EventHandler(this.btnSavePlaylist_Click);
             // 
-            // btnLoadPlaylist
-            // 
-            this.btnLoadPlaylist.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnLoadPlaylist.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnLoadPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadPlaylist.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnLoadPlaylist.ForeColor = System.Drawing.Color.White;
-            this.btnLoadPlaylist.Location = new System.Drawing.Point(262, 341);
-            this.btnLoadPlaylist.Name = "btnLoadPlaylist";
-            this.btnLoadPlaylist.Size = new System.Drawing.Size(118, 45);
-            this.btnLoadPlaylist.TabIndex = 18;
-            this.btnLoadPlaylist.Text = "Load Playlist";
-            this.btnLoadPlaylist.UseVisualStyleBackColor = false;
-            // 
             // btnDeletePlaylist
             // 
             this.btnDeletePlaylist.BackColor = System.Drawing.SystemColors.Highlight;
@@ -173,7 +164,7 @@
             this.btnDeletePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeletePlaylist.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDeletePlaylist.ForeColor = System.Drawing.Color.White;
-            this.btnDeletePlaylist.Location = new System.Drawing.Point(262, 392);
+            this.btnDeletePlaylist.Location = new System.Drawing.Point(262, 341);
             this.btnDeletePlaylist.Name = "btnDeletePlaylist";
             this.btnDeletePlaylist.Size = new System.Drawing.Size(118, 45);
             this.btnDeletePlaylist.TabIndex = 19;
@@ -187,7 +178,7 @@
             this.btnAddCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCategory.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAddCategory.ForeColor = System.Drawing.Color.White;
-            this.btnAddCategory.Location = new System.Drawing.Point(12, 443);
+            this.btnAddCategory.Location = new System.Drawing.Point(12, 398);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(244, 31);
             this.btnAddCategory.TabIndex = 20;
@@ -200,7 +191,7 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(12, 480);
+            this.button6.Location = new System.Drawing.Point(12, 435);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(244, 31);
             this.button6.TabIndex = 21;
@@ -213,7 +204,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(12, 517);
+            this.button7.Location = new System.Drawing.Point(12, 472);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(244, 31);
             this.button7.TabIndex = 22;
@@ -230,18 +221,101 @@
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
+            // btnAddImage
+            // 
+            this.btnAddImage.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAddImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddImage.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAddImage.ForeColor = System.Drawing.Color.White;
+            this.btnAddImage.Location = new System.Drawing.Point(386, 398);
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(113, 31);
+            this.btnAddImage.TabIndex = 24;
+            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.UseVisualStyleBackColor = false;
+            // 
+            // btnRemoveImage
+            // 
+            this.btnRemoveImage.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnRemoveImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveImage.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRemoveImage.ForeColor = System.Drawing.Color.White;
+            this.btnRemoveImage.Location = new System.Drawing.Point(386, 472);
+            this.btnRemoveImage.Name = "btnRemoveImage";
+            this.btnRemoveImage.Size = new System.Drawing.Size(113, 31);
+            this.btnRemoveImage.TabIndex = 25;
+            this.btnRemoveImage.Text = "Remove Image";
+            this.btnRemoveImage.UseVisualStyleBackColor = false;
+            // 
+            // btnEditImage
+            // 
+            this.btnEditImage.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnEditImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditImage.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnEditImage.ForeColor = System.Drawing.Color.White;
+            this.btnEditImage.Location = new System.Drawing.Point(386, 435);
+            this.btnEditImage.Name = "btnEditImage";
+            this.btnEditImage.Size = new System.Drawing.Size(113, 31);
+            this.btnEditImage.TabIndex = 26;
+            this.btnEditImage.Text = "Edit Image";
+            this.btnEditImage.UseVisualStyleBackColor = false;
+            // 
+            // btnRemoveComment
+            // 
+            this.btnRemoveComment.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnRemoveComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveComment.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRemoveComment.ForeColor = System.Drawing.Color.White;
+            this.btnRemoveComment.Location = new System.Drawing.Point(1278, 472);
+            this.btnRemoveComment.Name = "btnRemoveComment";
+            this.btnRemoveComment.Size = new System.Drawing.Size(121, 31);
+            this.btnRemoveComment.TabIndex = 27;
+            this.btnRemoveComment.Text = "Remove Comment";
+            this.btnRemoveComment.UseVisualStyleBackColor = false;
+            // 
+            // btnEditComment
+            // 
+            this.btnEditComment.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnEditComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditComment.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnEditComment.ForeColor = System.Drawing.Color.White;
+            this.btnEditComment.Location = new System.Drawing.Point(1278, 435);
+            this.btnEditComment.Name = "btnEditComment";
+            this.btnEditComment.Size = new System.Drawing.Size(121, 31);
+            this.btnEditComment.TabIndex = 28;
+            this.btnEditComment.Text = "Edit Comment";
+            this.btnEditComment.UseVisualStyleBackColor = false;
+            // 
+            // btnAddComment
+            // 
+            this.btnAddComment.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAddComment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddComment.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAddComment.ForeColor = System.Drawing.Color.White;
+            this.btnAddComment.Location = new System.Drawing.Point(1278, 398);
+            this.btnAddComment.Name = "btnAddComment";
+            this.btnAddComment.Size = new System.Drawing.Size(121, 31);
+            this.btnAddComment.TabIndex = 29;
+            this.btnAddComment.Text = "Add Comment";
+            this.btnAddComment.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1605, 570);
+            this.Controls.Add(this.btnAddComment);
+            this.Controls.Add(this.btnEditComment);
+            this.Controls.Add(this.btnRemoveComment);
+            this.Controls.Add(this.btnEditImage);
+            this.Controls.Add(this.btnRemoveImage);
+            this.Controls.Add(this.btnAddImage);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.btnAddCategory);
             this.Controls.Add(this.btnDeletePlaylist);
-            this.Controls.Add(this.btnLoadPlaylist);
             this.Controls.Add(this.btnSavePlaylist);
             this.Controls.Add(this.btnRenamePlaylist);
             this.Controls.Add(this.btnSelectMediaFiles);
@@ -273,11 +347,16 @@
         private Button btnSelectMediaFiles;
         private Button btnRenamePlaylist;
         private Button btnSavePlaylist;
-        private Button btnLoadPlaylist;
         private Button btnDeletePlaylist;
         private Button btnAddCategory;
         private Button button6;
         private Button button7;
         private PictureBox pictureBox1;
+        private Button btnAddImage;
+        private Button btnRemoveImage;
+        private Button btnEditImage;
+        private Button btnRemoveComment;
+        private Button btnEditComment;
+        private Button btnAddComment;
     }
 }
