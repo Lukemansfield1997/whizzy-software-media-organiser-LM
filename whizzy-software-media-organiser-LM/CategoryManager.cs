@@ -52,6 +52,7 @@ namespace whizzy_software_media_organiser_LM
                 if (checkedCategoryBox.GetItemCheckState(i) == CheckState.Checked)
                 {
                     _categoryService.AssignCategoriesToMediaFile(selectedMediaFileRow, selectedPlaylist);
+                    _mediaDataGridView.Refresh();
                 }
             }
         }

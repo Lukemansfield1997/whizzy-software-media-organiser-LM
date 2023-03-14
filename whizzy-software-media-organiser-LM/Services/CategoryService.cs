@@ -61,7 +61,7 @@ namespace whizzy_software_media_organiser_LM.Services
                 foreach (var cat in _allCategories)
                 {
                     mediaFile.CategoriesList.Add(cat);
-                }
+                }   
             }
 
         }
