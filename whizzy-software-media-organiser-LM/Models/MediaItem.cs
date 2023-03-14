@@ -14,6 +14,7 @@ namespace whizzy_software_media_organiser_LM.Models
         public string MediaImageName { get; set; }
         public string MediaImagePath { get; set; }
         public List<Category> CategoriesList { get; set; } = new List<Category>();
+        public string Categories => string.Join(", ", CategoriesList.Select(c => c.CategoryName));
         public string Comment { get; set; }
 
     }

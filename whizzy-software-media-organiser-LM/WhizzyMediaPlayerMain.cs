@@ -56,11 +56,18 @@ namespace whizzy_software_media_organiser_LM
                 BindingSource bs = new BindingSource();
                 bs.DataSource = playlist.MediaFileItems;
                 mediaFilesGridView.DataSource = bs;
-                mediaFilesGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells); 
+
+                //set columns and cells to Autosize
+                mediaFilesGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+                //Set row selection to FullRowSelect to avoid index out of range exception for adding Categories to media 
+                mediaFilesGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                //set media grid view to read only so user can only add and delete values from the windows controls I have created
+                mediaFilesGridView.ReadOnly = true;
             }
         }
         #endregion
-
         //PLAYLIST CODE
         #region
         private void btnCreatePlaylist_Click(object sender, EventArgs e)
