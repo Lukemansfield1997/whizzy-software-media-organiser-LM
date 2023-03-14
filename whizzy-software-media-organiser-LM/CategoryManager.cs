@@ -30,7 +30,9 @@ namespace whizzy_software_media_organiser_LM
 
         public void UpdateCategoryManagerDataSource()
         {
+            checkedCategoryBox.ClearSelected();
             checkedCategoryBox.DataSource = null;
+
             BindingSource bs = new BindingSource();
             bs.DataSource = _categoryService.GetCategories();
             checkedCategoryBox.DataSource = bs;
@@ -51,8 +53,9 @@ namespace whizzy_software_media_organiser_LM
                 //Foreach category item, if category item check state is checked, assign category to media file 
                 if (checkedCategoryBox.GetItemCheckState(i) == CheckState.Checked)
                 {
-                    _categoryService.AssignCategoriesToMediaFile(selectedMediaFileRow, selectedPlaylist);
+                    _categoryService.AssignCategoriesToMediaFile(selectedMediaFileRow, selectedPlaylist);             
                     _mediaDataGridView.Refresh();
+                    UpdateCategoryManagerDataSource();
                 }
             }
         }

@@ -36,7 +36,7 @@
             // 
             // checkedCategoryBox
             // 
-            this.checkedCategoryBox.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkedCategoryBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkedCategoryBox.ForeColor = System.Drawing.SystemColors.Highlight;
             this.checkedCategoryBox.FormattingEnabled = true;
             this.checkedCategoryBox.Location = new System.Drawing.Point(32, 12);
@@ -86,7 +86,7 @@
             this.btnRenameCategory.UseVisualStyleBackColor = false;
             this.btnRenameCategory.Click += new System.EventHandler(this.btnRenameCategory_Click);
             // 
-            // Form1
+            // CategoryManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -95,7 +95,7 @@
             this.Controls.Add(this.btnDeleteCategories);
             this.Controls.Add(this.btnAddCategories);
             this.Controls.Add(this.checkedCategoryBox);
-            this.Name = "Form1";
+            this.Name = "CategoryManager";
             this.Text = "Category Manager";
             this.ResumeLayout(false);
 
