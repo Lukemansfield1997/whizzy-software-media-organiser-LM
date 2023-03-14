@@ -40,8 +40,8 @@
             this.btnSavePlaylist = new System.Windows.Forms.Button();
             this.btnDeletePlaylist = new System.Windows.Forms.Button();
             this.btnAddCategory = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnManageMediaFileCats = new System.Windows.Forms.Button();
+            this.btnSaveCategories = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddImage = new System.Windows.Forms.Button();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -184,32 +184,34 @@
             this.btnAddCategory.TabIndex = 20;
             this.btnAddCategory.Text = "Add Category To Category Manager";
             this.btnAddCategory.UseVisualStyleBackColor = false;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
-            // button6
+            // btnManageMediaFileCats
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(12, 435);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(244, 31);
-            this.button6.TabIndex = 21;
-            this.button6.Text = "Manage Media Files Categories";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnManageMediaFileCats.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnManageMediaFileCats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageMediaFileCats.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnManageMediaFileCats.ForeColor = System.Drawing.Color.White;
+            this.btnManageMediaFileCats.Location = new System.Drawing.Point(12, 435);
+            this.btnManageMediaFileCats.Name = "btnManageMediaFileCats";
+            this.btnManageMediaFileCats.Size = new System.Drawing.Size(244, 31);
+            this.btnManageMediaFileCats.TabIndex = 21;
+            this.btnManageMediaFileCats.Text = "Manage Media Files Categories";
+            this.btnManageMediaFileCats.UseVisualStyleBackColor = false;
+            this.btnManageMediaFileCats.Click += new System.EventHandler(this.btnManageMediaFileCats_Click);
             // 
-            // button7
+            // btnSaveCategories
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(12, 472);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(244, 31);
-            this.button7.TabIndex = 22;
-            this.button7.Text = "Save Categories";
-            this.button7.UseVisualStyleBackColor = false;
+            this.btnSaveCategories.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnSaveCategories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveCategories.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSaveCategories.ForeColor = System.Drawing.Color.White;
+            this.btnSaveCategories.Location = new System.Drawing.Point(12, 472);
+            this.btnSaveCategories.Name = "btnSaveCategories";
+            this.btnSaveCategories.Size = new System.Drawing.Size(244, 31);
+            this.btnSaveCategories.TabIndex = 22;
+            this.btnSaveCategories.Text = "Save Categories";
+            this.btnSaveCategories.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
@@ -299,7 +301,7 @@
             this.btnAddComment.Text = "Add Comment";
             this.btnAddComment.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // WhizzyMediaPlayerMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -312,8 +314,8 @@
             this.Controls.Add(this.btnRemoveImage);
             this.Controls.Add(this.btnAddImage);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.btnSaveCategories);
+            this.Controls.Add(this.btnManageMediaFileCats);
             this.Controls.Add(this.btnAddCategory);
             this.Controls.Add(this.btnDeletePlaylist);
             this.Controls.Add(this.btnSavePlaylist);
@@ -324,7 +326,7 @@
             this.Controls.Add(this.playlistBox);
             this.Controls.Add(this.FilemenuStrip);
             this.MainMenuStrip = this.FilemenuStrip;
-            this.Name = "Form1";
+            this.Name = "WhizzyMediaPlayerMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FilemenuStrip.ResumeLayout(false);
@@ -349,8 +351,8 @@
         private Button btnSavePlaylist;
         private Button btnDeletePlaylist;
         private Button btnAddCategory;
-        private Button button6;
-        private Button button7;
+        private Button btnManageMediaFileCats;
+        private Button btnSaveCategories;
         private PictureBox pictureBox1;
         private Button btnAddImage;
         private Button btnRemoveImage;

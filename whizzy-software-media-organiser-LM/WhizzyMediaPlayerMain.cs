@@ -9,10 +9,12 @@ namespace whizzy_software_media_organiser_LM
     public partial class WhizzyMediaPlayerMain : Form
     {
         PlaylistServiceJsonDataStore _playlistService;
+        CategoryService _categoryService;
         public WhizzyMediaPlayerMain()
         {
             InitializeComponent();
             _playlistService = new PlaylistServiceJsonDataStore();
+            _categoryService = new CategoryService();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -89,6 +91,7 @@ namespace whizzy_software_media_organiser_LM
                         {
                             //create new instance of playlist and update ListBox datasource
                             var playlist = _playlistService.CreatePlaylist(playlistName);
+                            MessageBox.Show($"{playlistName} is created");
                             updateListBoxData();
                             playlistNameExists = false;
                         }
@@ -193,7 +196,9 @@ namespace whizzy_software_media_organiser_LM
                 MessageBox.Show("Error occured: Please select a playlist from your Playlists to save");
             }
         }
-
+        #endregion
+        //MEDIA FILES CODE
+        #region
         private void btnSelectMediaFiles_Click(object sender, EventArgs e)
         {
             var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
@@ -222,11 +227,59 @@ namespace whizzy_software_media_organiser_LM
             }
         }
         #endregion
-
         private void playlistBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
             updateMediaGridData(selectedPlaylist);
+        }
+        // CATEGORIES CODE
+        #region
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            bool categoryNameExists = true;
+
+            while (categoryNameExists)
+            {
+                string categoryName = Interaction.InputBox("Enter category name", "create category");
+
+                //Check if categoryName entered is null
+                switch (string.IsNullOrEmpty(categoryName))
+                {
+                    //if true, display message box showing the error
+                    case true:
+                        MessageBox.Show("Error occured: Category name cannot be empty, please try again.");
+                        categoryNameExists = false;
+                        break;
+
+                    //if false but the category name exists in allCategories using Linq, display message box showing the error
+                    case false:
+                        if (_categoryService.GetCategories().Any(c => c.CategoryName == categoryName))
+                        {
+                            MessageBox.Show("Error occured: Category name already exists, please try again.");
+                            categoryNameExists = true;
+                        }
+                        else
+                        {
+                            //create new instance of category
+                            _categoryService.CreateCategory(categoryName);
+                            MessageBox.Show($"{categoryName} is created");
+                            categoryNameExists = false;
+                        }
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        private void btnManageMediaFileCats_Click(object sender, EventArgs e)
+        {
+            //when manage media files categories is clicked, create an instance of CategoryManager form
+            //show form in context of a dialog box
+            using (CategoryManager categoryManager = new CategoryManager(_categoryService, mediaFilesGridView, playlistBox))
+            {
+                categoryManager.UpdateCategoryManagerDataSource();
+                categoryManager.ShowDialog();
+            }
         }
     }
 }

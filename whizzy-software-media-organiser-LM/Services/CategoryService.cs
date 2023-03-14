@@ -22,7 +22,7 @@ namespace whizzy_software_media_organiser_LM.Services
         {
             _allCategories.Add(new Category
             {
-                CategoryId = _allCategories.Count,
+                CategoryID = _allCategories.Count,
                 CategoryName = categoryName
             });
         }
@@ -40,9 +40,30 @@ namespace whizzy_software_media_organiser_LM.Services
         public Category GetCategoryById(int id)
         {
             // will iterate through the playlist list and find a playlist that matches the playlist id parsed
-            return _allCategories.SingleOrDefault(i => i.CategoryId == id);
+            return _allCategories.SingleOrDefault(i => i.CategoryID == id);
         }
 
+        public List<Category> GetCategories()
+        {
+            return _allCategories;
+        }
 
+        public void AssignCategoriesToMediaFile(int selectedMediaRow, Playlist selectedPlaylist)
+        {
+            //statement checks selected media row is greater or equal 0, indicates row is selected in grid view
+            //then checks selectedMediaRow is less than total playlist media file items list count to validate index is in range
+            if (selectedMediaRow >= 0 && selectedMediaRow < selectedPlaylist.MediaFileItems.Count)
+            {
+                //finds the media file selected in the playlist media files by using the selected index of the media file row
+                var mediaFile = selectedPlaylist.MediaFileItems[selectedMediaRow];
+
+                //add categories to mediaFile item categories list
+                foreach (var cat in _allCategories)
+                {
+                    mediaFile.CategoriesList.Add(cat);
+                }
+            }
+
+        }
     }
 }
