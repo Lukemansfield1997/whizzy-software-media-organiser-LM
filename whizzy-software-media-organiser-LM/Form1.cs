@@ -1,4 +1,5 @@
 using Microsoft.VisualBasic;
+using System.Windows.Forms;
 using whizzy_software_media_organiser_LM.Models;
 using whizzy_software_media_organiser_LM.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -24,8 +25,15 @@ namespace whizzy_software_media_organiser_LM
         //Datasource helper methods
         public void updateListBoxData()
         {
+            // Unbinds the data source from the mediaDataGridView control
             playlistBox.DataSource = null;
-            playlistBox.DataSource = _playlistService.GetPlayLists();
+
+            // Bind the data source to a new instance of BindingSource
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _playlistService.GetPlayLists();
+            playlistBox.DataSource = bs;
+
+            //set display and value member to correct properties 
             playlistBox.DisplayMember = "PlaylistName";
             playlistBox.ValueMember = "PlaylistID";
 
@@ -35,8 +43,17 @@ namespace whizzy_software_media_organiser_LM
         {
             if (playlist != null && playlistBox.SelectedIndex >= 0)
             {
+                // Unbinds the data source from the mediaDataGridView control
                 mediaFilesGridView.DataSource = null;
-                mediaFilesGridView.DataSource = playlist.MediaFileItems;
+
+                // Clear the rows and columns
+                mediaFilesGridView.Rows.Clear();
+                mediaFilesGridView.Columns.Clear();
+
+                // Bind the data source to a new instance of BindingSource
+                BindingSource bs = new BindingSource();
+                bs.DataSource = playlist.MediaFileItems;
+                mediaFilesGridView.DataSource = bs;
                 mediaFilesGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells); 
             }
         }
