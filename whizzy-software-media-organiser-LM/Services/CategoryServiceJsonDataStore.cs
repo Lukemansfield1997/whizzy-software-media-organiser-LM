@@ -7,12 +7,12 @@ using whizzy_software_media_organiser_LM.Models;
 
 namespace whizzy_software_media_organiser_LM.Services
 {
-    public class CategoryService
+    public class CategoryServiceJsonDataStore
     {
         private List<Category> _allCategories;
         private JsonDataStoreService _jsonDataStoreService;
 
-        public CategoryService()
+        public CategoryServiceJsonDataStore()
         {
             _jsonDataStoreService = new JsonDataStoreService();
             _allCategories = new List<Category>();
@@ -35,6 +35,7 @@ namespace whizzy_software_media_organiser_LM.Services
         public void DeleteCategory(int categoryID)
         {
             _allCategories.Remove(GetCategoryById(categoryID));
+            _jsonDataStoreService.DeleteCategory(categoryID);   
         }
 
         public Category GetCategoryById(int id)
@@ -46,6 +47,16 @@ namespace whizzy_software_media_organiser_LM.Services
         public List<Category> GetCategories()
         {
             return _allCategories;
+        }
+
+        public void SaveCategories()
+        {
+            _jsonDataStoreService.SaveCategories(_allCategories);
+        }
+
+        public void LoadCategories()
+        {
+            _jsonDataStoreService.LoadCategories(_allCategories);
         }
 
         public void AssignCategoriesToMediaFile(int selectedMediaRow, Playlist selectedPlaylist, List<Category> selectedCategories)

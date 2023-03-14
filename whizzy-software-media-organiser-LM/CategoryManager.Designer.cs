@@ -97,6 +97,7 @@
             this.Controls.Add(this.checkedCategoryBox);
             this.Name = "CategoryManager";
             this.Text = "Category Manager";
+            this.Load += new System.EventHandler(this.CategoryManager_Load);
             this.ResumeLayout(false);
 
         }

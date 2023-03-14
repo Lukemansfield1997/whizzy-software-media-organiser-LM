@@ -4,12 +4,12 @@ namespace whizzy_software_media_organiser_Tests
 {
     public class CategoryTests
     {
-        CategoryService _categoryService;
+        CategoryServiceJsonDataStore _categoryService;
 
         [SetUp]
         public void Setup()
         {
-            _categoryService = new CategoryService();
+            _categoryService = new CategoryServiceJsonDataStore();
         }
 
         [Test]

@@ -9,12 +9,12 @@ namespace whizzy_software_media_organiser_LM
     public partial class WhizzyMediaPlayerMain : Form
     {
         PlaylistServiceJsonDataStore _playlistService;
-        CategoryService _categoryService;
+        CategoryServiceJsonDataStore _categoryService;
         public WhizzyMediaPlayerMain()
         {
             InitializeComponent();
             _playlistService = new PlaylistServiceJsonDataStore();
-            _categoryService = new CategoryService();
+            _categoryService = new CategoryServiceJsonDataStore();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -287,6 +287,11 @@ namespace whizzy_software_media_organiser_LM
                 categoryManager.UpdateCategoryManagerDataSource();
                 categoryManager.ShowDialog();
             }
+        }
+
+        private void btnSaveCategories_Click(object sender, EventArgs e)
+        {
+            _categoryService.SaveCategories();
         }
     }
 }

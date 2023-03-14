@@ -16,18 +16,24 @@ namespace whizzy_software_media_organiser_LM
 {
     public partial class CategoryManager : Form
     {
-        CategoryService _categoryService;
+        CategoryServiceJsonDataStore _categoryService;
         DataGridView _mediaDataGridView;
         ListBox _playistBox;
 
         //Parse an instance of categoryService, mediaDataGridView and playlistBox to the CategoryManager form
         //these objects are created in the WhizzyMediaPlayerMain Form 
-        public CategoryManager(CategoryService categoryService,DataGridView mediaDataGridView, ListBox playistBox)
+        public CategoryManager(CategoryServiceJsonDataStore categoryService,DataGridView mediaDataGridView, ListBox playistBox)
         {
             InitializeComponent();
             this._categoryService = categoryService;
             this._mediaDataGridView = mediaDataGridView;
             this._playistBox = playistBox;
+        }
+
+        private void CategoryManager_Load(object sender, EventArgs e)
+        {
+            _categoryService.LoadCategories();
+            UpdateCategoryManagerDataSource();
         }
 
         public void UpdateCategoryManagerDataSource()
@@ -141,7 +147,7 @@ namespace whizzy_software_media_organiser_LM
             var selectedPlaylist = (Playlist)_playistBox.SelectedItem;
 
             //if playlist object is not null and category item is selected, loop through all checkedCatItems and remove cat from mediaFile and allCategories list
-            if (selectedPlaylist != null && checkedCategoryBox.SelectedItem != null && 
+            if (checkedCategoryBox.SelectedItem != null && 
                 checkedCategoryBox.GetItemCheckState(checkedCategoryBox.SelectedIndex) == CheckState.Checked)
             {
                 foreach (Category category in checkedCategoryBox.CheckedItems)
@@ -150,14 +156,19 @@ namespace whizzy_software_media_organiser_LM
                     int categoryID = category.CategoryID;
                     string categoryName = category.CategoryName;
 
-                    foreach (var mediaFileItem in selectedPlaylist.MediaFileItems)
+                    _categoryService.DeleteCategory(categoryID);
+
+                    if (selectedPlaylist is not null)
                     {
-                        if (mediaFileItem.CategoriesList.Contains(category))
+                        foreach (var mediaFileItem in selectedPlaylist.MediaFileItems)
                         {
-                            mediaFileItem.CategoriesList.Remove(category);
-                            _categoryService.DeleteCategory(categoryID);
+                            if (mediaFileItem.CategoriesList.Contains(category))
+                            {
+                                mediaFileItem.CategoriesList.Remove(category);
+                            }
                         }
                     }
+                    
                 }
                 _mediaDataGridView.Refresh();
                 UpdateCategoryManagerDataSource();

@@ -212,6 +212,7 @@
             this.btnSaveCategories.TabIndex = 22;
             this.btnSaveCategories.Text = "Save Categories";
             this.btnSaveCategories.UseVisualStyleBackColor = false;
+            this.btnSaveCategories.Click += new System.EventHandler(this.btnSaveCategories_Click);
             // 
             // pictureBox1
             // 

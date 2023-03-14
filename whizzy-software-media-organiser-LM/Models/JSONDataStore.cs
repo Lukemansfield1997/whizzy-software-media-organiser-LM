@@ -10,5 +10,6 @@ namespace whizzy_software_media_organiser_LM.Models
     {
         public string ApplicationDirectoryPath { get; set; }
         public string SavedPlaylistsDirectory { get; set; }
+        public string SavedCategoriesDirectory { get; set; }
     }
 }

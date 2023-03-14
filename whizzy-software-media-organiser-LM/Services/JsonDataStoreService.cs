@@ -19,12 +19,18 @@ namespace whizzy_software_media_organiser_LM.Services
             //Will get current working directory path and save this to the ApplicationDirectoryPath property
             _jsonDataStoreConfig.ApplicationDirectoryPath = Directory.GetCurrentDirectory();
             _jsonDataStoreConfig.SavedPlaylistsDirectory = Path.Combine(_jsonDataStoreConfig.ApplicationDirectoryPath, "SavedPlaylists");
+            _jsonDataStoreConfig.SavedCategoriesDirectory = Path.Combine(_jsonDataStoreConfig.ApplicationDirectoryPath, "SavedCategories");
 
-            //Code will check if the application contains the playlists directory
-            //If false it will createDirectory using savedPlaylists property name and path
+            //Code will check if the application contains the playlists directory or categories directory
+            //If false it will createDirectory using savedPlaylists or savedCategories property name and path
             if (!Directory.Exists(_jsonDataStoreConfig.SavedPlaylistsDirectory))
             {
                 Directory.CreateDirectory(_jsonDataStoreConfig.SavedPlaylistsDirectory);
+            }
+
+            if (!Directory.Exists(_jsonDataStoreConfig.SavedCategoriesDirectory))
+            {
+                Directory.CreateDirectory(_jsonDataStoreConfig.SavedCategoriesDirectory);
             }
         }
 
@@ -66,6 +72,44 @@ namespace whizzy_software_media_organiser_LM.Services
         public void DeletePlaylist(int playlistID)
         {
             string filePath = Path.Combine(_jsonDataStoreConfig.SavedPlaylistsDirectory, $"{playlistID}.json");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
+        public void SaveCategories(List<Category> categories)
+        {
+            var jsonToWrite = JsonConvert.SerializeObject(categories, Formatting.Indented);
+
+            string filePath = Path.Combine(Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory), "Categories.json");
+
+            using (var writer = new StreamWriter(filePath))
+            {
+                writer.Write(jsonToWrite);
+
+            }
+        }
+
+        public void LoadCategories(List<Category> categories)
+        {
+            string categoryFilePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
+
+            if (File.Exists(categoryFilePath))
+            {
+                string catJsonFile = File.ReadAllText(categoryFilePath);
+                var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
+
+                categories.AddRange(catList);
+            }
+        }
+
+
+
+        public void DeleteCategory(int categoryID)
+        {
+            string filePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
 
             if (File.Exists(filePath))
             {
