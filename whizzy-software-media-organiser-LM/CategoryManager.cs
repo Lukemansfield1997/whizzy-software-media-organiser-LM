@@ -30,7 +30,6 @@ namespace whizzy_software_media_organiser_LM
 
         public void UpdateCategoryManagerDataSource()
         {
-            checkedCategoryBox.ClearSelected();
             checkedCategoryBox.DataSource = null;
 
             BindingSource bs = new BindingSource();
@@ -42,21 +41,28 @@ namespace whizzy_software_media_organiser_LM
 
         private void btnAddCategories_Click(object sender, EventArgs e)
         {
-            var selectedPlaylist = (Playlist)_playistBox.SelectedItem;
+            var checkedCategories = new List<Category>();
 
-            //gets the selected row in the mediaDataGridView
-            int selectedMediaFileRow = _mediaDataGridView.SelectedRows[0].Index;
-
-            //loop through all of the category items in Category Manager
-            for (int i = 0; i < checkedCategoryBox.CheckedItems.Count; i++)
+            //Get CheckedItems in Category Manager and add to List so items in the list are fixed and can be enumerated
+            foreach (var selectedCat in checkedCategoryBox.CheckedItems)
             {
-                //Foreach category item, if category item check state is checked, assign category to media file 
-                if (checkedCategoryBox.GetItemCheckState(i) == CheckState.Checked)
-                {
-                    _categoryService.AssignCategoriesToMediaFile(selectedMediaFileRow, selectedPlaylist);             
-                    _mediaDataGridView.Refresh();
-                    UpdateCategoryManagerDataSource();
-                }
+                var selectedCategory = (Category)selectedCat;
+                checkedCategories.Add(selectedCategory);
+            }
+
+            //if list has 1 or more item then execute AssignCategoriestoMediaFile method
+            if (checkedCategories.Count > 0)
+            {
+                //gets the selected playlist in the playlistBox
+                var selectedPlaylist = (Playlist)_playistBox.SelectedItem;
+
+                //gets the selected row in the mediaDataGridView
+                int selectedMediaFileRow = _mediaDataGridView.SelectedRows[0].Index;
+
+                //parse selected playlist, selected media row and checkedCategories to method
+                _categoryService.AssignCategoriesToMediaFile(selectedMediaFileRow, selectedPlaylist, checkedCategories);
+                _mediaDataGridView.Refresh();
+                checkedCategoryBox.ClearSelected();
             }
         }
 

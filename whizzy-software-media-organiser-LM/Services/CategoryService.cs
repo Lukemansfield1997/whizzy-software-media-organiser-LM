@@ -48,7 +48,7 @@ namespace whizzy_software_media_organiser_LM.Services
             return _allCategories;
         }
 
-        public void AssignCategoriesToMediaFile(int selectedMediaRow, Playlist selectedPlaylist)
+        public void AssignCategoriesToMediaFile(int selectedMediaRow, Playlist selectedPlaylist, List<Category> selectedCategories)
         {
             //statement checks selected media row is greater or equal 0, indicates row is selected in grid view
             //then checks selectedMediaRow is less than total playlist media file items list count to validate index is in range
@@ -58,10 +58,7 @@ namespace whizzy_software_media_organiser_LM.Services
                 var mediaFile = selectedPlaylist.MediaFileItems[selectedMediaRow];
 
                 //add categories to mediaFile item categories list
-                foreach (var cat in _allCategories)
-                {
-                    mediaFile.CategoriesList.Add(cat);
-                }   
+                mediaFile.CategoriesList.AddRange(selectedCategories);
             }
 
         }
