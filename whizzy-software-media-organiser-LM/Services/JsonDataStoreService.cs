@@ -35,7 +35,7 @@ namespace whizzy_software_media_organiser_LM.Services
             }
         }
 
-        public void SavePlaylists(Playlist playlist)
+        public void SavePlaylist(Playlist playlist)
         {
             //line 34: will Serialize the parsed playlist object into JSON format
             var playlistJsonToWrite = JsonConvert.SerializeObject(playlist, Formatting.Indented);

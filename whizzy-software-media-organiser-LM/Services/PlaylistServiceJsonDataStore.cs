@@ -64,7 +64,7 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void SavePlaylist(Playlist playlist)
         {
-          _jsonDataStoreService.SavePlaylists(playlist);    
+          _jsonDataStoreService.SavePlaylist(playlist);    
         }
 
         public void DeletePlaylist(int playlistID)

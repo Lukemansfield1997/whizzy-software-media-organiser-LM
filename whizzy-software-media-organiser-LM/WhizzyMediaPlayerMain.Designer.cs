@@ -49,6 +49,7 @@
             this.btnRemoveComment = new System.Windows.Forms.Button();
             this.btnEditComment = new System.Windows.Forms.Button();
             this.btnAddComment = new System.Windows.Forms.Button();
+            this.btnDeleteSelectedCatMediaFile = new System.Windows.Forms.Button();
             this.FilemenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -196,7 +197,7 @@
             this.btnManageMediaFileCats.Name = "btnManageMediaFileCats";
             this.btnManageMediaFileCats.Size = new System.Drawing.Size(244, 31);
             this.btnManageMediaFileCats.TabIndex = 21;
-            this.btnManageMediaFileCats.Text = "Manage Media Files Categories";
+            this.btnManageMediaFileCats.Text = "Manage Categories in Category Manager";
             this.btnManageMediaFileCats.UseVisualStyleBackColor = false;
             this.btnManageMediaFileCats.Click += new System.EventHandler(this.btnManageMediaFileCats_Click);
             // 
@@ -210,7 +211,7 @@
             this.btnSaveCategories.Name = "btnSaveCategories";
             this.btnSaveCategories.Size = new System.Drawing.Size(244, 31);
             this.btnSaveCategories.TabIndex = 22;
-            this.btnSaveCategories.Text = "Save Categories";
+            this.btnSaveCategories.Text = "Save Categories in Category Manager";
             this.btnSaveCategories.UseVisualStyleBackColor = false;
             this.btnSaveCategories.Click += new System.EventHandler(this.btnSaveCategories_Click);
             // 
@@ -308,12 +309,27 @@
             this.btnAddComment.UseVisualStyleBackColor = false;
             this.btnAddComment.Click += new System.EventHandler(this.btnAddComment_Click);
             // 
+            // btnDeleteSelectedCatMediaFile
+            // 
+            this.btnDeleteSelectedCatMediaFile.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnDeleteSelectedCatMediaFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSelectedCatMediaFile.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDeleteSelectedCatMediaFile.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteSelectedCatMediaFile.Location = new System.Drawing.Point(12, 509);
+            this.btnDeleteSelectedCatMediaFile.Name = "btnDeleteSelectedCatMediaFile";
+            this.btnDeleteSelectedCatMediaFile.Size = new System.Drawing.Size(244, 31);
+            this.btnDeleteSelectedCatMediaFile.TabIndex = 31;
+            this.btnDeleteSelectedCatMediaFile.Text = "Delete Category From Selected Media file";
+            this.btnDeleteSelectedCatMediaFile.UseVisualStyleBackColor = false;
+            this.btnDeleteSelectedCatMediaFile.Click += new System.EventHandler(this.btnDeleteSelectedCatMediaFile_Click);
+            // 
             // WhizzyMediaPlayerMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1605, 570);
+            this.ClientSize = new System.Drawing.Size(1605, 662);
+            this.Controls.Add(this.btnDeleteSelectedCatMediaFile);
             this.Controls.Add(this.btnAddComment);
             this.Controls.Add(this.btnEditComment);
             this.Controls.Add(this.btnRemoveComment);
@@ -367,5 +383,6 @@
         private Button btnRemoveComment;
         private Button btnEditComment;
         private Button btnAddComment;
+        private Button btnDeleteSelectedCatMediaFile;
     }
 }

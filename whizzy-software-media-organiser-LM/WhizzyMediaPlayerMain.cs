@@ -158,7 +158,7 @@ namespace whizzy_software_media_organiser_LM
 
             if (selectedPlaylist is not null)
             {
-               oldPlaylistName = selectedPlaylist.PlayListName;
+                oldPlaylistName = selectedPlaylist.PlayListName;
                 bool playlistNameExists = true;
 
                 while (playlistNameExists)
@@ -303,7 +303,7 @@ namespace whizzy_software_media_organiser_LM
             try
             {
                 _categoryService.SaveCategories();
-                MessageBox.Show("Categories saved successfully.");
+                MessageBox.Show($"Categories saved successfully.");
             }
             catch (Exception ex)
             {
@@ -403,7 +403,7 @@ namespace whizzy_software_media_organiser_LM
                     }
                 }
             }
-            catch(IndexOutOfRangeException ex)
+            catch (IndexOutOfRangeException ex)
             {
                 MessageBox.Show($"Error occured: Invalid media file selected: {ex.Message}");
             }
@@ -483,5 +483,33 @@ namespace whizzy_software_media_organiser_LM
             }
         }
         #endregion
+
+        private void btnDeleteSelectedCatMediaFile_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            var selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+             string deleteCategoryFromMediaFile = Interaction.InputBox("Please enter the category name you want to delete from media file", "Delete Media File Category");
+
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                // if Category name parsed from users is in the media file categfories list then execute block of code in if statement
+                if (mediaItem.CategoriesList.Any(c => c.CategoryName == deleteCategoryFromMediaFile))
+                {
+                    //newCategoriesList will check where categoryName in current list is not equal to category name user wants to delete
+                    var newCategoriesList = mediaItem.CategoriesList.Where(c => c.CategoryName != deleteCategoryFromMediaFile).ToList();
+
+                    //it will then add filtered list of categories to the newCategoriesList and mediaItem list will equal newCategoriesList
+                    mediaItem.CategoriesList = newCategoriesList;
+                    updateMediaGridData(selectedPlaylist);
+                }
+                else
+                {
+                    MessageBox.Show($"Error occured: Category {deleteCategoryFromMediaFile} does not exist in media file selected, please try again");
+                }
+            }
+        }
     }
 }
