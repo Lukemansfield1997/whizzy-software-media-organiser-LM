@@ -72,6 +72,7 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void DeletePlaylist(int playlistID)
         {
+            //will Delete the Playlist json file according to the playlistID value parsed
             string filePath = Path.Combine(_jsonDataStoreConfig.SavedPlaylistsDirectory, $"{playlistID}.json");
 
             if (File.Exists(filePath))
@@ -111,35 +112,39 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void DeleteCategory(int categoryID)
         {
-            //read categories json file, deserialise into JSON object and check if categoryID is in the object deserilased.
             //if true, delete object and reserialise list back into JSON object and write to category file path
 
             string catFilePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
 
             if (File.Exists(catFilePath))
             {
-                string catJsonFile = File.ReadAllText(catFilePath);
-                var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
-
-                //create new list of categories to avoid System.InvalidOperationException: 'Collection was modified error.
-                List<Category> newcategoriesList = new List<Category>();
-
-                foreach (var cat in catList)
+                using (var reader = new StreamReader(catFilePath))
                 {
-                    //if categories do not equal same ID as parsed category to delete, add to new list of categories
-                    if (cat.CategoryID != categoryID)
+                    //read categories json file, deserialise into JSON object.
+                    string catJsonFile = reader.ReadToEnd();
+                    var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
+
+                    //create new list of categories to avoid System.InvalidOperationException: 'Collection was modified error.
+                    List<Category> newcategoriesList = new List<Category>();
+
+                    foreach (var cat in catList)
                     {
-                        newcategoriesList.Add(cat);
+                        //foreach category in list that was deserialised, if categoryID is not equal to parsed catID to be deleted
+                        //add category object to new list of categories
+                        if (cat.CategoryID != categoryID)
+                        {
+                            newcategoriesList.Add(cat);
+                        }
                     }
-                }
+                    //Serialise new list of categories into JSON object
+                    var jsonToWrite = JsonConvert.SerializeObject(newcategoriesList, Formatting.Indented);
 
-                //Serialise new list of categories into JSON object and write file to categories path
-                var jsonToWrite = JsonConvert.SerializeObject(newcategoriesList, Formatting.Indented);
-
-                using (var writer = new StreamWriter(catFilePath))
-                {
-                    writer.Write(jsonToWrite);
-                }
+                    using (var writer = new StreamWriter(catFilePath))
+                    {
+                        //write new categories list json file to categories path
+                        writer.Write(jsonToWrite);
+                    }
+                }   
             }
         }
     }
