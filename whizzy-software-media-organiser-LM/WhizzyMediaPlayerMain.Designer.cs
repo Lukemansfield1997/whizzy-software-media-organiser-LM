@@ -236,6 +236,7 @@
             this.btnAddImage.TabIndex = 24;
             this.btnAddImage.Text = "Add Image";
             this.btnAddImage.UseVisualStyleBackColor = false;
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnRemoveImage
             // 
@@ -249,6 +250,7 @@
             this.btnRemoveImage.TabIndex = 25;
             this.btnRemoveImage.Text = "Remove Image";
             this.btnRemoveImage.UseVisualStyleBackColor = false;
+            this.btnRemoveImage.Click += new System.EventHandler(this.btnRemoveImage_Click);
             // 
             // btnEditImage
             // 
@@ -262,6 +264,7 @@
             this.btnEditImage.TabIndex = 26;
             this.btnEditImage.Text = "Edit Image";
             this.btnEditImage.UseVisualStyleBackColor = false;
+            this.btnEditImage.Click += new System.EventHandler(this.btnEditImage_Click);
             // 
             // btnRemoveComment
             // 

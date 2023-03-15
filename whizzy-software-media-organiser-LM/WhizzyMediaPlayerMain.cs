@@ -24,7 +24,7 @@ namespace whizzy_software_media_organiser_LM
             updateListBoxData();
         }
 
-        //Datasource and Event listener helper methods
+        //DATASOURCE/EVENT LISTENER HELPER METHODS
         #region
         public void updateListBoxData()
         {
@@ -286,7 +286,6 @@ namespace whizzy_software_media_organiser_LM
                 }
             }
         }
-        #endregion
 
         private void btnManageMediaFileCats_Click(object sender, EventArgs e)
         {
@@ -311,5 +310,105 @@ namespace whizzy_software_media_organiser_LM
                 MessageBox.Show($"An error occurred while saving the categories: {ex.Message}");
             }
         }
+        #endregion
+        //MEDIA IMAGES CODE
+        #region
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                // cast Media item at the selected index within the MediaFileItems list
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                if (mediaItem != null)
+                {
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.Filter = "Image files|*.jpg;*.png;*.gif;*.bmp|All files|*.*";
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            string imagePath = openFileDialog.FileName;
+                            string imageName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+
+                            _playlistService.AddMediaImage(selectedPlaylist, selectedMediaFileRow, imagePath, imageName);
+                            updateMediaGridData(selectedPlaylist);
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Error occured: please select a valid playlist and media file you want to add a media image to");
+            }
+        }
+
+        private void btnEditImage_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                // cast Media item at the selected index within the MediaFileItems list
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                if (mediaItem != null)
+                {
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.Filter = "Image files|*.jpg;*.png;*.gif;*.bmp|All files|*.*";
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            string imagePath = openFileDialog.FileName;
+                            string imageName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+
+                            _playlistService.EditMediaImage(selectedPlaylist, selectedMediaFileRow, imagePath, imageName);
+                            updateMediaGridData(selectedPlaylist);
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Error occured: please select a valid playlist and media file you want to replace a media image with");
+            }
+        }
+
+        private void btnRemoveImage_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            try
+            {
+                if (selectedMediaFileRow >= 0 && selectedPlaylist is not null)
+                {
+                    // cast Media item at the selected index within the MediaFileItems list
+                    var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                    if (mediaItem != null)
+                    {
+                        _playlistService.DeleteMediaImage(selectedPlaylist, selectedMediaFileRow);
+                        updateMediaGridData(selectedPlaylist);
+                    }
+                }
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+                MessageBox.Show($"Error occured: Invalid media file selected: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the media file image: {ex.Message}");
+            }
+        }
+        #endregion
     }
 }

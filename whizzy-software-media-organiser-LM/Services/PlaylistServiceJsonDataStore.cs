@@ -84,5 +84,33 @@ namespace whizzy_software_media_organiser_LM.Services
                 FileType = Path.GetExtension(mediaFile)
             });
         }
+
+        public void AddMediaImage(Playlist playlist, int mediaFileRow, string imagePath, string imageName)
+        {
+            var selectedPlaylist = GetPlayListById(playlist.PlayListID);
+            var selectedMediaRow = mediaFileRow;
+
+            var mediaFile = selectedPlaylist.MediaFileItems[selectedMediaRow];
+
+            mediaFile.MediaImagePath = imagePath;
+            mediaFile.MediaImageName = imageName;
+        }
+
+        public void EditMediaImage(Playlist playlist, int mediaFileRow, string imagePath, string imageName)
+        {
+           this.AddMediaImage(playlist, mediaFileRow, imagePath, imageName);
+        }
+
+        public void DeleteMediaImage(Playlist playlist, int mediaFileRow)
+        {
+            var selectedPlaylist = GetPlayListById(playlist.PlayListID);
+            var selectedMediaRow = mediaFileRow;
+
+            var mediaFile = selectedPlaylist.MediaFileItems[mediaFileRow];
+
+            mediaFile.MediaImagePath = "";
+            mediaFile.MediaImageName = "";
+        }
+
     }
 }
