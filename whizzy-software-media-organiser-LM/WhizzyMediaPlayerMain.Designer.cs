@@ -278,6 +278,7 @@
             this.btnRemoveComment.TabIndex = 27;
             this.btnRemoveComment.Text = "Remove Comment";
             this.btnRemoveComment.UseVisualStyleBackColor = false;
+            this.btnRemoveComment.Click += new System.EventHandler(this.btnRemoveComment_Click);
             // 
             // btnEditComment
             // 
@@ -291,6 +292,7 @@
             this.btnEditComment.TabIndex = 28;
             this.btnEditComment.Text = "Edit Comment";
             this.btnEditComment.UseVisualStyleBackColor = false;
+            this.btnEditComment.Click += new System.EventHandler(this.btnEditComment_Click);
             // 
             // btnAddComment
             // 
@@ -304,6 +306,7 @@
             this.btnAddComment.TabIndex = 29;
             this.btnAddComment.Text = "Add Comment";
             this.btnAddComment.UseVisualStyleBackColor = false;
+            this.btnAddComment.Click += new System.EventHandler(this.btnAddComment_Click);
             // 
             // WhizzyMediaPlayerMain
             // 

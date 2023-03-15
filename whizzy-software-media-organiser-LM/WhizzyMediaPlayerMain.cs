@@ -361,14 +361,17 @@ namespace whizzy_software_media_organiser_LM
                 {
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
+                        //filter for only image related formats
                         openFileDialog.Filter = "Image files|*.jpg;*.png;*.gif;*.bmp|All files|*.*";
 
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
+                            //set imagePath and imageName to fileName selected in openFileDialog
                             string imagePath = openFileDialog.FileName;
                             string imageName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
 
-                            _playlistService.EditMediaImage(selectedPlaylist, selectedMediaFileRow, imagePath, imageName);
+                            //parse values to EditMediaImage method
+                            _playlistService.AddMediaImage(selectedPlaylist, selectedMediaFileRow, imagePath, imageName);
                             updateMediaGridData(selectedPlaylist);
                         }
                     }
@@ -407,6 +410,76 @@ namespace whizzy_software_media_organiser_LM
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while deleting the media file image: {ex.Message}");
+            }
+        }
+        #endregion
+        //COMMENTS CODE
+        #region
+        private void btnAddComment_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                // cast Media item at the selected index within the MediaFileItems list
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                if (mediaItem != null)
+                {
+                    string comment = Interaction.InputBox("Add comment", "Add comment to media file");
+                    mediaItem.Comment = comment;
+                    updateMediaGridData(selectedPlaylist);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error occured: please select a valid playlist and media file you want to add a comment to");
+            }
+        }
+
+        private void btnEditComment_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                // cast Media item at the selected index within the MediaFileItems list
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                if (mediaItem != null)
+                {
+                    string comment = Interaction.InputBox("Edit comment", "Edit comment to media file");
+                    mediaItem.Comment = comment;
+                    updateMediaGridData(selectedPlaylist);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error occured: please select a valid playlist and media file you want to add a comment to");
+            }
+        }
+
+        private void btnRemoveComment_Click(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            int selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                // cast Media item at the selected index within the MediaFileItems list
+                var mediaItem = selectedPlaylist.MediaFileItems[selectedMediaFileRow];
+
+                if (mediaItem != null)
+                {
+                    _playlistService.DeleteComment(selectedPlaylist, selectedMediaFileRow);
+                    updateMediaGridData(selectedPlaylist);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error occured: please select a valid playlist and media file you want to remove a comment");
             }
         }
         #endregion
