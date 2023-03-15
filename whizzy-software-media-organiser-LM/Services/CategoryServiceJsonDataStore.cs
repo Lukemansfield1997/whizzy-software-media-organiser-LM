@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using whizzy_software_media_organiser_LM.Models;
@@ -20,12 +21,20 @@ namespace whizzy_software_media_organiser_LM.Services
 
         public void CreateCategory(string categoryName)
         {
+            int newCategoryID = 1; // set the default ID as 1
+            while (_allCategories.Any(c => c.CategoryID == newCategoryID))
+            {
+                // increment the ID until a unique ID is found in allCategories to use
+                newCategoryID++;
+            }
+
             _allCategories.Add(new Category
             {
                 CategoryID = _allCategories.Count,
                 CategoryName = categoryName
             });
         }
+
 
         public void RenameCategory (Category category, string categoryName)
         {

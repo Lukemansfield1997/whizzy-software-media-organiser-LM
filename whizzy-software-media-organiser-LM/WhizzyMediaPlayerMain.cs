@@ -24,8 +24,8 @@ namespace whizzy_software_media_organiser_LM
             updateListBoxData();
         }
 
+        //Datasource and Event listener helper methods
         #region
-        //Datasource helper methods
         public void updateListBoxData()
         {
             // Unbinds the data source from the mediaDataGridView control
@@ -67,6 +67,12 @@ namespace whizzy_software_media_organiser_LM
                 //set media grid view to read only so user can only add and delete values from the windows controls I have created
                 mediaFilesGridView.ReadOnly = true;
             }
+        }
+
+        private void playlistBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            updateMediaGridData(selectedPlaylist);
         }
         #endregion
         //PLAYLIST CODE
@@ -194,14 +200,22 @@ namespace whizzy_software_media_organiser_LM
         {
             var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
 
-            if (selectedPlaylist is not null)
+            try
             {
-                _playlistService.SavePlaylist(selectedPlaylist);
-                MessageBox.Show($"Playlist: {selectedPlaylist.PlayListName} is saved");
+                if (selectedPlaylist is not null)
+                {
+                    _playlistService.SavePlaylist(selectedPlaylist);
+                    MessageBox.Show($"Playlist: {selectedPlaylist.PlayListName} is saved");
+                }
+                else
+                {
+                    MessageBox.Show("Error occured: Please select a playlist from your Playlists to save");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error occured: Please select a playlist from your Playlists to save");
+
+                MessageBox.Show($"An error occurred while saving the playlist: {ex.Message}");
             }
         }
         #endregion
@@ -235,11 +249,6 @@ namespace whizzy_software_media_organiser_LM
             }
         }
         #endregion
-        private void playlistBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
-            updateMediaGridData(selectedPlaylist);
-        }
         // CATEGORIES CODE
         #region
         private void btnAddCategory_Click(object sender, EventArgs e)
@@ -292,7 +301,15 @@ namespace whizzy_software_media_organiser_LM
 
         private void btnSaveCategories_Click(object sender, EventArgs e)
         {
-            _categoryService.SaveCategories();
+            try
+            {
+                _categoryService.SaveCategories();
+                MessageBox.Show("Categories saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the categories: {ex.Message}");
+            }
         }
     }
 }

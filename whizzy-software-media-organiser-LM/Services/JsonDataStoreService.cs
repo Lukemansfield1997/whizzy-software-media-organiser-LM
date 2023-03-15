@@ -106,45 +106,41 @@ namespace whizzy_software_media_organiser_LM.Services
                     var savedCategories = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
 
                     categories.AddRange(savedCategories);
-                }             
+                }
             }
         }
 
         public void DeleteCategory(int categoryID)
         {
-            //if true, delete object and reserialise list back into JSON object and write to category file path
-
             string catFilePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
 
             if (File.Exists(catFilePath))
             {
-                using (var reader = new StreamReader(catFilePath))
+                //read categories json file, deserialise into JSON object using File.ReadAllText to avoid process error with writer and reader objects.
+                string catJsonFile = File.ReadAllText(catFilePath);
+                var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
+
+                //create new list of categories to avoid System.InvalidOperationException: 'Collection was modified error.
+                List<Category> newcategoriesList = new List<Category>();
+
+                foreach (var cat in catList)
                 {
-                    //read categories json file, deserialise into JSON object.
-                    string catJsonFile = reader.ReadToEnd();
-                    var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
-
-                    //create new list of categories to avoid System.InvalidOperationException: 'Collection was modified error.
-                    List<Category> newcategoriesList = new List<Category>();
-
-                    foreach (var cat in catList)
+                    //foreach category in list that was deserialised, if categoryID is not equal to parsed catID to be deleted
+                    //add category object to new list of categories
+                    if (cat.CategoryID != categoryID)
                     {
-                        //foreach category in list that was deserialised, if categoryID is not equal to parsed catID to be deleted
-                        //add category object to new list of categories
-                        if (cat.CategoryID != categoryID)
-                        {
-                            newcategoriesList.Add(cat);
-                        }
+                        newcategoriesList.Add(cat);
                     }
-                    //Serialise new list of categories into JSON object
-                    var jsonToWrite = JsonConvert.SerializeObject(newcategoriesList, Formatting.Indented);
+                }
 
-                    using (var writer = new StreamWriter(catFilePath))
-                    {
-                        //write new categories list json file to categories path
-                        writer.Write(jsonToWrite);
-                    }
-                }   
+                //Serialise new list of categories into JSON object
+                var jsonToWrite = JsonConvert.SerializeObject(newcategoriesList, Formatting.Indented);
+
+                using (var writer = new StreamWriter(catFilePath))
+                {
+                    //write new categories list json file to categories path
+                    writer.Write(jsonToWrite);
+                }
             }
         }
     }
