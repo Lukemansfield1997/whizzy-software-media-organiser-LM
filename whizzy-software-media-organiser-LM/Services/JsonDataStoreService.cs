@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using whizzy_software_media_organiser_LM.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace whizzy_software_media_organiser_LM.Services
 {
@@ -98,22 +99,47 @@ namespace whizzy_software_media_organiser_LM.Services
 
             if (File.Exists(categoryFilePath))
             {
-                string catJsonFile = File.ReadAllText(categoryFilePath);
-                var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
+                using (var reader = new StreamReader(categoryFilePath))
+                {
+                    string catJsonFile = reader.ReadToEnd();
+                    var savedCategories = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
 
-                categories.AddRange(catList);
+                    categories.AddRange(savedCategories);
+                }             
             }
         }
 
-
-
         public void DeleteCategory(int categoryID)
         {
-            string filePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
+            //read categories json file, deserialise into JSON object and check if categoryID is in the object deserilased.
+            //if true, delete object and reserialise list back into JSON object and write to category file path
 
-            if (File.Exists(filePath))
+            string catFilePath = Path.Combine(_jsonDataStoreConfig.SavedCategoriesDirectory, "Categories.json");
+
+            if (File.Exists(catFilePath))
             {
-                File.Delete(filePath);
+                string catJsonFile = File.ReadAllText(catFilePath);
+                var catList = JsonConvert.DeserializeObject<List<Category>>(catJsonFile);
+
+                //create new list of categories to avoid System.InvalidOperationException: 'Collection was modified error.
+                List<Category> newcategoriesList = new List<Category>();
+
+                foreach (var cat in catList)
+                {
+                    //if categories do not equal same ID as parsed category to delete, add to new list of categories
+                    if (cat.CategoryID != categoryID)
+                    {
+                        newcategoriesList.Add(cat);
+                    }
+                }
+
+                //Serialise new list of categories into JSON object and write file to categories path
+                var jsonToWrite = JsonConvert.SerializeObject(newcategoriesList, Formatting.Indented);
+
+                using (var writer = new StreamWriter(catFilePath))
+                {
+                    writer.Write(jsonToWrite);
+                }
             }
         }
     }

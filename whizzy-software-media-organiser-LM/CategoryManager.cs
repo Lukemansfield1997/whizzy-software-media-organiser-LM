@@ -32,7 +32,6 @@ namespace whizzy_software_media_organiser_LM
 
         private void CategoryManager_Load(object sender, EventArgs e)
         {
-            _categoryService.LoadCategories();
             UpdateCategoryManagerDataSource();
         }
 

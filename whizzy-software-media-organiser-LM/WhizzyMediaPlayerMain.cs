@@ -20,6 +20,7 @@ namespace whizzy_software_media_organiser_LM
         private void Form1_Load(object sender, EventArgs e)
         {
             _playlistService.LoadPlaylists();
+            _categoryService.LoadCategories();
             updateListBoxData();
         }
 
