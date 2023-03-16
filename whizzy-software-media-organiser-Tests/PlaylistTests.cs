@@ -1,4 +1,3 @@
-using whizzy_software_media_organiser_LM.Services;
 
 namespace whizzy_software_media_organiser_Tests
 {

@@ -50,6 +50,9 @@
             this.btnEditComment = new System.Windows.Forms.Button();
             this.btnAddComment = new System.Windows.Forms.Button();
             this.btnDeleteSelectedCatMediaFile = new System.Windows.Forms.Button();
+            this.btnResume = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.FilemenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mediaFilesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -323,12 +326,60 @@
             this.btnDeleteSelectedCatMediaFile.UseVisualStyleBackColor = false;
             this.btnDeleteSelectedCatMediaFile.Click += new System.EventHandler(this.btnDeleteSelectedCatMediaFile_Click);
             // 
+            // btnResume
+            // 
+            this.btnResume.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnResume.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResume.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnResume.ForeColor = System.Drawing.Color.White;
+            this.btnResume.Location = new System.Drawing.Point(835, 398);
+            this.btnResume.Name = "btnResume";
+            this.btnResume.Size = new System.Drawing.Size(105, 39);
+            this.btnResume.TabIndex = 32;
+            this.btnResume.Text = "Resume";
+            this.btnResume.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnResume.UseVisualStyleBackColor = false;
+            this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPause.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPause.ForeColor = System.Drawing.Color.White;
+            this.btnPause.Location = new System.Drawing.Point(724, 398);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(105, 39);
+            this.btnPause.TabIndex = 33;
+            this.btnPause.Text = "Pause";
+            this.btnPause.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnStop.ForeColor = System.Drawing.Color.White;
+            this.btnStop.Location = new System.Drawing.Point(946, 398);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(105, 39);
+            this.btnStop.TabIndex = 34;
+            this.btnStop.Text = "Stop";
+            this.btnStop.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // WhizzyMediaPlayerMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1605, 662);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.btnResume);
             this.Controls.Add(this.btnDeleteSelectedCatMediaFile);
             this.Controls.Add(this.btnAddComment);
             this.Controls.Add(this.btnEditComment);
@@ -384,5 +435,8 @@
         private Button btnEditComment;
         private Button btnAddComment;
         private Button btnDeleteSelectedCatMediaFile;
+        private Button btnResume;
+        private Button btnPause;
+        private Button btnStop;
     }
 }
