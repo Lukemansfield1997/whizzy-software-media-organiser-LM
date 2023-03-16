@@ -47,7 +47,7 @@ namespace whizzy_software_media_organiser_LM
             checkedCategoryBox.DisplayMember = "CategoryName";
             checkedCategoryBox.ValueMember = "CategoryID";
         }
-        #region
+        #endregion
 
         //CATEGORY MANAGER CODE
         #region
