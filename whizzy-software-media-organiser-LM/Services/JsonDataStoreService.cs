@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using whizzy_software_media_organiser_LM.Interfaces;
 using whizzy_software_media_organiser_LM.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace whizzy_software_media_organiser_LM.Services
 {
-    public class JsonDataStoreService
+    public class JsonDataStoreService : IDataSource
     {
         private JsonDataStore _jsonDataStoreConfig;
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using whizzy_software_media_organiser_LM.Interfaces;
 using whizzy_software_media_organiser_LM.Models;
 
 namespace whizzy_software_media_organiser_LM.Services
@@ -11,7 +12,7 @@ namespace whizzy_software_media_organiser_LM.Services
     public class CategoryServiceJsonDataStore
     {
         private List<Category> _allCategories;
-        private JsonDataStoreService _jsonDataStoreService;
+        private IDataSource _jsonDataStoreService;
 
         public CategoryServiceJsonDataStore()
         {

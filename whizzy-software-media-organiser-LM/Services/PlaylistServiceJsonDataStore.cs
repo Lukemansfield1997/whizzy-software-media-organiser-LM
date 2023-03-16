@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using whizzy_software_media_organiser_LM.Interfaces;
 using whizzy_software_media_organiser_LM.Models;
 
 namespace whizzy_software_media_organiser_LM.Services
@@ -12,7 +13,7 @@ namespace whizzy_software_media_organiser_LM.Services
     public class PlaylistServiceJsonDataStore
     {
         private List<Playlist> _allPlaylists;
-        private JsonDataStoreService _jsonDataStoreService;
+        private IDataSource _jsonDataStoreService;
 
         public PlaylistServiceJsonDataStore()
         {
