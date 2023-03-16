@@ -89,8 +89,9 @@
             // mediaPathToolStripMenuItem
             // 
             this.mediaPathToolStripMenuItem.Name = "mediaPathToolStripMenuItem";
-            this.mediaPathToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.mediaPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mediaPathToolStripMenuItem.Text = "Media Path";
+            this.mediaPathToolStripMenuItem.Click += new System.EventHandler(this.mediaPathToolStripMenuItem_Click);
             // 
             // mediaFilesGridView
             // 

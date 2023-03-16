@@ -27,7 +27,7 @@ namespace whizzy_software_media_organiser_LM
             updateListBoxData();
         }
 
-        //DATASOURCE/EVENT LISTENER HELPER METHODS
+        //DATASOURCE/EVENT LISTENER AND HELPER METHODS
         #region
         public void updateListBoxData()
         {
@@ -69,6 +69,19 @@ namespace whizzy_software_media_organiser_LM
 
                 //set media grid view to read only so user can only add and delete values from the windows controls I have created
                 mediaFilesGridView.ReadOnly = true;
+            }
+        }
+
+        private void mediaPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string defaultDirectory = folderBrowserDialog.SelectedPath;
+
+                    MessageBox.Show($"Media path set to {defaultDirectory}");
+                }
             }
         }
 
