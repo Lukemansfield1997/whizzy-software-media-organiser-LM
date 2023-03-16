@@ -35,6 +35,8 @@ namespace whizzy_software_media_organiser_LM
             UpdateCategoryManagerDataSource();
         }
 
+        //DATASOURCE HELPER METHOD CODE
+        #region
         public void UpdateCategoryManagerDataSource()
         {
             checkedCategoryBox.DataSource = null;
@@ -45,7 +47,10 @@ namespace whizzy_software_media_organiser_LM
             checkedCategoryBox.DisplayMember = "CategoryName";
             checkedCategoryBox.ValueMember = "CategoryID";
         }
+        #region
 
+        //CATEGORY MANAGER CODE
+        #region
         private void btnAddCategories_Click(object sender, EventArgs e)
         {
             var checkedCategories = new List<Category>();
@@ -177,5 +182,6 @@ namespace whizzy_software_media_organiser_LM
                 MessageBox.Show("Error occured: Please check a valid category to delete");
             }
         }
+        #endregion
     }
 }
