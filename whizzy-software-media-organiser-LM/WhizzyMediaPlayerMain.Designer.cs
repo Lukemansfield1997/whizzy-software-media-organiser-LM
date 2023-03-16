@@ -100,6 +100,7 @@
             this.mediaFilesGridView.RowTemplate.Height = 25;
             this.mediaFilesGridView.Size = new System.Drawing.Size(1013, 259);
             this.mediaFilesGridView.TabIndex = 2;
+            this.mediaFilesGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mediaFilesGridView_CellDoubleClick);
             // 
             // btnCreatePlaylist
             // 

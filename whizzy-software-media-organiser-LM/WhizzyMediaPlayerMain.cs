@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
+using whizzy_software_media_organiser_LM.Interfaces;
 using whizzy_software_media_organiser_LM.Models;
 using whizzy_software_media_organiser_LM.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -10,11 +11,13 @@ namespace whizzy_software_media_organiser_LM
     {
         PlaylistServiceJsonDataStore _playlistService;
         CategoryServiceJsonDataStore _categoryService;
+        IMediaPlayer _naudioPlayerService;
         public WhizzyMediaPlayerMain()
         {
             InitializeComponent();
             _playlistService = new PlaylistServiceJsonDataStore();
             _categoryService = new CategoryServiceJsonDataStore();
+            _naudioPlayerService = new NAudioPlayerService();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -516,17 +519,67 @@ namespace whizzy_software_media_organiser_LM
 
         private void btnResume_Click(object sender, EventArgs e)
         {
+            try
+            {
+                _naudioPlayerService.Resume();
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show($"Error occured: error while playing media: {ex.Message}");
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            try
+            {
+                _naudioPlayerService.Stop();
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show($"Error occured: error while stopping media: {ex.Message}");
+            }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
+            try
+            {
+                _naudioPlayerService.Pause();
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show($"Error occured: error while pausing media: {ex.Message}");
+            }
+        }
+
+
+        private void mediaFilesGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedPlaylist = (Playlist)playlistBox.SelectedItem;
+            var selectedMediaFileRow = mediaFilesGridView.SelectedRows[0].Index;
+
+            if (selectedPlaylist is not null && selectedMediaFileRow >= 0)
+            {
+                //media file path column index is 1
+                int mediaFilePathColumn = 1;
+
+                //this code will return the media file path value at the parse column and row index
+                string mediaFilePath = mediaFilesGridView[mediaFilePathColumn, selectedMediaFileRow].Value.ToString();
+
+                if (File.Exists(mediaFilePath))
+                {
+                    // Stop the current audio playback
+                    _naudioPlayerService.Stop();
+
+                    // Play the selected audio file
+                    _naudioPlayerService.LoadMediaFile(mediaFilePath);
+                    _naudioPlayerService.Play();
+                }
+            }
         }
         #endregion
     }
