@@ -143,6 +143,7 @@ namespace whizzy_software_media_organiser_LM
                     _playlistService.DeletePlaylist(selectedPlaylist.PlayListID);
                     MessageBox.Show($"Playlist: {selectedPlaylist.PlayListName} is deleted from your playlists");
                     updateListBoxData();
+                    updateMediaGridData(selectedPlaylist);
                 }
                 //will catch exception for index out of range and inform the user
                 catch (IndexOutOfRangeException ex)
